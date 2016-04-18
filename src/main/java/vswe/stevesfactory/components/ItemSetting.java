@@ -166,9 +166,12 @@ public class ItemSetting extends Setting {
         }else {
             switch (fuzzyMode) {
                 case ORE_DICTIONARY:
-                    int id = OreDictionary.getOreIDs(this.getItem())[0];
-                    if (id != -1) {
-                        return  id == OreDictionary.getOreIDs(other)[0];
+                    int[] ids = OreDictionary.getOreIDs(this.getItem());
+                    if (ids.length > 0) {
+                        int[] otherIds = OreDictionary.getOreIDs(other);
+                        if (otherIds.length > 0){
+                            return ids[0] == otherIds[0];
+                        }
                     }
                     //note that this falls through into the precise one, this is on purpose
                 case PRECISE:
